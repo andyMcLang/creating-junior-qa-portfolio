@@ -8,7 +8,7 @@ Tämä on QA-testauksen opiskelumateriaali- ja harjoituskansio.
 |----------|--------|
 | `test_example.py` | Playwright-esimerkkitesti |
 | `test_example_selitykset.txt` | Esimerkkitestin selitykset suomeksi |
-| `linkkivinkkejä_opiskeluun_by_ChatGPT_17.1.2026.docx` | Opiskelulinkkejä ja resursseja |
+| `linkkivinkkejä_opiskeluun_by_cG_17.1.2026.docx` | Opiskelulinkkejä ja resursseja |
 
 ## Vaatimukset
 
