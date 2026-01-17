@@ -1,0 +1,83 @@
+TEST_EXAMPLE.PY - SELITYKSET SUOMEKSI
+=====================================
+
+Tämä tiedosto sisältää kaksi Playwright-testia, jotka testaavat
+Playwrightin omaa verkkosivustoa (https://playwright.dev/).
+
+
+RIVINUMEROT JA SELITYKSET:
+--------------------------
+
+RIVI 1: import re
+   - Tuo Pythonin "re" (regular expressions) kirjaston
+   - Mahdollistaa säännöllisten lausekkeiden käytön tekstin haussa
+   - Käytetään myöhemmin otsikon tarkistamisessa
+
+RIVI 2: from playwright.sync_api import Page, expect
+   - Tuo Playwright-kirjastosta kaksi asiaa:
+     * Page = selainsivu, jota voimme ohjata
+     * expect = funktio, jolla tehdään tarkistuksia (assertioita)
+
+
+TESTI 1: test_has_title (rivit 4-8)
+---------------------------------------
+
+RIVI 4: def test_has_title(page: Page):
+   - Määrittelee testifunktion nimeltä "test_has_title"
+   - "page: Page" = testi saa automaattisesti selainsivun käyttöönsä
+   - Pytest tunnistaa tämän testiksi koska nimi alkaa "test_"
+
+RIVI 5: page.goto("https://playwright.dev/")
+   - Navigoi selaimella Playwright-sivustolle
+   - Sama kuin kirjoittaisit osoitteen selaimen osoitepalkkiin
+
+RIVI 8: expect(page).to_have_title(re.compile("Playwright"))
+   - Tarkistaa että sivun otsikko (title) sisältää sanan "Playwright"
+   - re.compile("Playwright") = etsii tekstiä joka sisältää "Playwright"
+   - Jos otsikko ei sisällä sanaa, testi epäonnistuu
+
+
+TESTI 2: test_get_started_link (rivit 10-17)
+--------------------------------------------
+
+RIVI 10: def test_get_started_link(page: Page):
+   - Toinen testifunktio
+   - Testaa "Get started" -linkin toimintaa
+
+RIVI 11: page.goto("https://playwright.dev/")
+   - Navigoi taas Playwright-sivustolle
+
+RIVI 14: page.get_by_role("link", name="Get started").click()
+   - Etsii sivulta linkin jonka teksti on "Get started"
+   - get_by_role("link", ...) = etsii HTML-linkkielementtiä (<a>)
+   - .click() = klikkaa löydettyä linkkiä
+
+RIVI 17: expect(page.get_by_role("heading", name="Installation")).to_be_visible()
+   - Tarkistaa että klikkauksen jälkeen näkyy otsikko "Installation"
+   - get_by_role("heading", ...) = etsii otsikkoelementtiä (<h1>, <h2> jne.)
+   - .to_be_visible() = elementin pitää olla näkyvissä
+
+
+YHTEENVETO:
+-----------
+Nämä testit tekevät seuraavat asiat:
+
+1. test_has_title:
+   - Avaa playwright.dev-sivuston
+   - Tarkistaa että sivun otsikossa lukee "Playwright"
+
+2. test_get_started_link:
+   - Avaa playwright.dev-sivuston
+   - Klikkaa "Get started" -linkkiä
+   - Tarkistaa että avautuneella sivulla näkyy "Installation" -otsikko
+
+
+TESTIEN AJAMINEN:
+-----------------
+Kun olet asentanut Pythonin ja pytest-playwrightin, aja testit komennolla:
+
+   pytest test_example.py
+
+Tai nähdäksesi testien suorituksen selaimessa:
+
+   pytest test_example.py --headed
